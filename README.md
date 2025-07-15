@@ -20,7 +20,7 @@ def tokenize_cls_p3(example, tokenizer, max_length, is_train):
     final_p_tokens = tokenizer("\n\n---\nWhich response is better? [A or B or tie]\nAnswer: ", add_special_tokens=False)["input_ids"]
     for ps, ras, rbs in zip(example['prompt'], example['response_a'], example['response_b']):
         one_input_ids = [tokenizer.bos_token_id]
-        prev_tokens_num = 2 + len(final_p_tokens) # 2 for bos_token and eos_token
+        prev_tokens_num = 2 + len(final_p_tokens)
         for idx, (p, ra, rb) in enumerate(zip(ps, ras, rbs)):
             r_tokens  = tokenizer(f'\n\n## Round {idx+1}:' if idx else f'## Round {idx+1}:', add_special_tokens=False)["input_ids"]
             p_tokens  = tokenizer(f'\n### Prompt:\n{p}', add_special_tokens=False)["input_ids"]
